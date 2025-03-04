@@ -27,10 +27,10 @@ let char = 'c'
 let bool = true
 
 // Array 
-let arr = [1,2,3,4,5]
+let arr = [1, 2, 3, 4, 5]
 
 
-let arrCopy = [ ... arr ]
+let arrCopy = [...arr]
 
 arr.push(55)
 
@@ -38,15 +38,15 @@ arr.push(55)
 // const first = arr[1]
 // const sec = arr[2]
 
-const [ first, sec ] = arr
+const [first, sec] = arr
 
 // console.log(arrCopy)
 
 // Obj
 
-let obj = { message : "value",  code : 200}
+let obj = { message: "value", code: 200 }
 
-let objCopy = {... obj, code: 201 }
+let objCopy = { ...obj, code: 201 }
 
 
 
@@ -62,15 +62,15 @@ obj.code = 500
 
 let input = 5
 
-if (input > 10) {
-  console.log("True")
-} else if (input < 20) {
-  console.log("False")
-} else {
-  console.log("Else")
-}
+// if (input > 10) {
+//   console.log("True")
+// } else if (input < 20) {
+//   console.log("False")
+// } else {
+//   console.log("Else")
+// }
 
-console.log( input > 10 ? "True" : ( input < 20 ) ?  "False" : "Else" )
+// console.log( input > 10 ? "True" : ( input < 20 ) ?  "False" : "Else" )
 
 
 // arrow function
@@ -83,25 +83,73 @@ function maFunction(input) {
 const myArrowFunc = () => input > 10
 
 
+let notes = [10, 15, 6, 18, 17]
 
 
-let notes = [10,15,6,18,17]
+const newArr = notes.filter((note) => note >= 10)
 
-
-const newArr = notes.filter( (note) => note >= 10 )
-
-notes.map( (note) => note + 1 )
+notes.map((note) => note + 1)
 
 let somme = 0
 notes.forEach((note) => somme = somme + note)
 const avg = somme / notes.length
 
 
-const average = notes.reduce( ( acc, note ) => { acc + note }, 0) / notes.length
+const average = notes.reduce((acc, note) => { acc + note }, 0) / notes.length
+
+
+// Chaining Operator
+
+
+const user = { name: "Jhon", matieres: { math: { notes: [] } } }
+const user2 = { name: "Jhon", matieres: { svt: { notes: [] } } }
+
+
+// console.log(user2?.matieres?.math?.notes)
+// console.log(user?.matieres?.math?.notes)
+
+
+// concat
+// (backtick)
+
+
+let firstname = "Jhon"
+let lastname = "Doe"
+
+const fullname = firstname + " " + lastname
+const concat = `${firstname} ${lastname}`
+
+// console.log(fullname)
+
+
+const sleep = (ms) => {
+  return new Promise((resolve, reject) => {
+    return setTimeout(resolve, ms)
+  })
+} 
+
+
+const asyncFunc = async () => {
+  console.log("Start")
+  await sleep(2000)
+  console.log("End")
+}
+
+
+const syncFunc = () => {
+  console.log("Start")
+  sleep(2000)
+  .then( () => {
+    console.log("Resolved")
+  } )
+  .catch( () => {
+    console.log("Reject")
+  })
+  console.log("End")
+}
 
 
 
-
-
+syncFunc()
 
 
