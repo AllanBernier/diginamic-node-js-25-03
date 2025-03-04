@@ -4,9 +4,9 @@ const { apiResponse } = require('./11_async');
  * Utilisez la fonction Promise.all pour exécuter 3 appels API en parallèle
  *
  * urls:
- * - https://jsonplaceholder.typicode.com/todos/1
- * - https://jsonplaceholder.typicode.com/todos/2
- * - https://jsonplaceholder.typicode.com/todos/3
+ * - https://jsonplaceholder.typicode.com/todos/1 
+ * - https://jsonplaceholder.typicode.com/todos/2 
+ * - https://jsonplaceholder.typicode.com/todos/3 
  *
  * Retournez un tableau contenant les 3 résultats
  *
@@ -16,6 +16,13 @@ const { apiResponse } = require('./11_async');
  */
 
 
-const parallel = undefined
+const parallel = async () => {
+  const responses = await Promise.all([
+    apiResponse("https://jsonplaceholder.typicode.com/todos/1"),
+    apiResponse("https://jsonplaceholder.typicode.com/todos/2"),
+    apiResponse("https://jsonplaceholder.typicode.com/todos/3")
+  ])
+  return responses
+}
 
 module.exports = { parallel };

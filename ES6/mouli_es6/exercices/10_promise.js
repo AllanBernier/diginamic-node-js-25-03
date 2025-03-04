@@ -5,6 +5,13 @@
  * utilisez new Promise
  */
 
-const sleep = undefined
+// const sleep = () => new Promise( resolve => setTimeout(() => resolve(), 2000) )
 
-module.exports = {sleep};
+const sleep = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve() , 2000)
+  })
+}
+
+
+module.exports = { sleep };
