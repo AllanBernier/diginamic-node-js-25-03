@@ -1,3 +1,5 @@
+const User = require("../model/User")
+
 const hello = (req, res) => {
   res.send("Hello world !")
 }
