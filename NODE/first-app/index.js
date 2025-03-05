@@ -47,7 +47,6 @@ app.get("/search", (req, res) => {
   } else {
     res.send("Aucune recherche effectuée.")
   }
-
 })
 
 
