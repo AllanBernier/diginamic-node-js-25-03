@@ -1,14 +1,42 @@
 const User = require("../model/User")
 
-const hello = (req, res) => {
-  res.send("Hello world !")
+const index = async (req, res) => {
+  User.findAll().then((users) => {
+    res.json(users)
+  })
+}
+const show = (req, res) => {
+  const id = parseInt(req.params.id)
+
+  User.findByPk(id)
+    .then((user) => {
+      res.json(user)
+    })
+    .catch((err) => {
+      res.status(404).json({ message: "User not found !" })
+    })
+}
+const store = (req, res) => {
+  User.create(req.body)
+    .then((user) => {
+      res.status(201).json({ message: "User created !", user })
+    })
+}
+const update = (req, res) => {
+  const id = parseInt(req.params.id)
+
+  User.update(req.body, { where: { id } })
+    .then((user) => {
+      res.json({ message: "User updated", user })
+    })
+}
+const destroy = (req, res) => {
+  const id = parseInt(req.params.id)
+
+  User.destroy({ where : {id}})
+  .then( (user) => {
+    res.json({message: "User Deleted", user})
+  })
 }
 
-const goodbye = (req, res) => {
-  res.send("Bye !")
-}
-
-
-
-
-module.exports = { hello, goodbye }
+module.exports = { index, show, store, update, destroy }

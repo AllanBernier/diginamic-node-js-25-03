@@ -1,12 +1,14 @@
 const express = require("express")
-const { hello, goodbye } = require("../controller/userController")
+const { index, show, store, update, destroy } = require("../controller/userController")
+
 
 const router = express.Router()
 
-
-router.get("/hello", hello)
-router.get("/good-bye/:id", goodbye)
-
+router.get("/users", index)
+router.get("/users/:id", show)
+router.post("/users", store)
+router.put("/users/:id", update)
+router.post("/users/:id", destroy)
 
 
 
