@@ -20,11 +20,20 @@ const Products = [
 let maxId = 5
 
 
+
+
+// Exercice 10 : Simulation d’un retard pour tester le front-end
+// Ajoutez un middleware à toutes les routes pour simuler un retard de 2 secondes avant de répondre, en utilisant setTimeout.
+app.use((req, res, next) => {
+  setTimeout( next ,2000)
+})
+
+
 // Exercice 1 : GET - Récupérer tous les produits (getAll)
 // Créez une route GET sur l’URL /products qui retourne la liste complète des produits sous forme de JSON.
-app.get("/products", (req, res) => {
-  res.json(Products)
-})
+// app.get("/products", (req, res) => {
+//   res.json(Products)
+// })
 
 
 // Exercice 3 : GET - Rechercher un produit par un champ
@@ -57,6 +66,28 @@ app.get("/products/:id", (req, res) => {
   res.json(product)
 })
 
+// Exercice 7 : Validation des données lors du POST et du PUT
+// Mettez à jour les routes POST et PUT pour inclure une validation des données :
+// Assurez-vous que name est une chaîne non vide et que age est un entier positif.
+// Si les données sont invalides, retournez une erreur 400 avec un message d’erreur JSON
+
+const validateProduct = (req, res, next) => {
+  const { name, price, description, stock } = req.body
+
+  if (!name || typeof name !== 'string' || name.length === 0) 
+    return res.status(400).json({message : "Le nom est requis"})
+
+  if (!description || typeof description !== 'string' || description.length === 0) 
+    return res.status(400).json({message : "Le description est requis"})
+
+  if (!price || typeof price !== 'number' || price <= 0) 
+    return res.status(400).json({message : "Le prix est requis"})
+
+  if (!stock || typeof stock !== 'number' || stock < 0) 
+    return res.status(400).json({message : "Le stock est requis"})
+
+  next()
+}
 
 
 
@@ -67,7 +98,8 @@ app.get("/products/:id", (req, res) => {
 // Assurez-vous que l'ID de l'produit est généré automatiquement (par exemple, incrémenté à partir de l'ID le plus élevé).
 // Retournez l'produit nouvellement ajouté avec un statut 201.
 
-app.post("/products", (req, res) => {
+app.post("/products", validateProduct,  (req, res) => {
+  
   const product = req.body
   product.id = ++maxId
 
@@ -83,7 +115,7 @@ app.post("/products", (req, res) => {
 // Si l'produit n'existe pas, renvoyez une erreur 404.
 // Retournez les informations mises à jour de l’produit.
 
-app.put("/products/:id", (req, res) => {
+app.put("/products/:id", validateProduct, (req, res) => {
   const product = { ... req.body, id: parseInt(req.params.id) }
 
   const index = Products.findIndex((p) => p.id === product.id)
@@ -112,24 +144,31 @@ app.delete("/products/:id", (req, res) => {
 })
 
 
-
-// Exercice 7 : Validation des données lors du POST et du PUT
-// Mettez à jour les routes POST et PUT pour inclure une validation des données :
-// Assurez-vous que name est une chaîne non vide et que age est un entier positif.
-// Si les données sont invalides, retournez une erreur 400 avec un message d’erreur JSON
-
-
 // Exercice 8 : Limitation des résultats avec GET - getAll avec pagination
 // Ajoutez une fonctionnalité de pagination à la route GET /products.
 // Acceptez deux paramètres de requête : page (numéro de page) et limit (nombre d’éléments par page).
 // Retournez uniquement les produits correspondant à la page demandée.
 // Exemple de requête :
 // GET /products?page=1&limit=2
+app.get("/products", (req, res) => {
+  const page = parseInt(req.query.page) || 1 
+  const limit = parseInt(req.query.limit) || 2
+
+  const start = (page -1) * limit
+  const end = page * limit
+
+  res.json({
+    currentPage : page,
+    itemsPerPage : limit,
+    total : Products.length,
+    data : Products.slice(start, end)    
+  })
+})
+
 
 
 // Exercice 9 : Gestion des erreurs pour les routes non trouvées
 // Ajoutez un middleware qui intercepte les routes non définies et retourne une erreur 404 avec un message d’erreur:
-
-
-// Exercice 10 : Simulation d’un retard pour tester le front-end
-// Ajoutez un middleware à toutes les routes pour simuler un retard de 2 secondes avant de répondre, en utilisant setTimeout.
+app.use( (req, res) => {
+  res.status(404).json({ message : "Route non définit"})
+})
