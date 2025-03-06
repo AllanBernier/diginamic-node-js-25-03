@@ -6,7 +6,6 @@ const PORT = process.env.SERVER_PORT || 3001
 
 const mongoose = require("mongoose")
 
-
 mongoose.connect(process.env.DB_URL)
   .then((result) => {
     app.listen(PORT, () => {
@@ -17,3 +16,5 @@ mongoose.connect(process.env.DB_URL)
     console.log("Erreur /!\\ :", err)
   })
 
+
+app.use(require("./router/userRouter"))
