@@ -1,4 +1,4 @@
-const User = require("../model/User")
+const { User } = require("../model/index")
 
 const index = async (req, res) => {
   User.findAll().then((users) => {
