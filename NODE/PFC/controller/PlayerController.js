@@ -1,4 +1,4 @@
-const Player = require("../model/Player")
+const { Player } = require("../model/index")
 
 
 const index = (req, res) => {

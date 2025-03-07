@@ -1,8 +1,10 @@
 const router = require("express").Router()
-const { playAgainstComputer } = require("../controller/MatchController")
+const { playAgainstComputer, getPlayerMatchs, getLeaderboard } = require("../controller/MatchController")
 
 
+router.get('/matchs/player/:id', getPlayerMatchs)
+router.get('/matchs/leaderboard', getLeaderboard)
+router.post("/matchs/:playerId", playAgainstComputer)
 
-router.post("/matchs", playAgainstComputer)
 
 module.exports = router

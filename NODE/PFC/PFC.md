@@ -23,9 +23,11 @@ La table est représentée par user_choice, computer_choice, result
 Réaliser les routes :
 
 GET /matchs/leaderboards --> Affiche les 10 joueurs ayant le plus de victoires
+
+Modifier la route POST /matchs/:playerId?action=[pierre, feuille, ciseaux] afin d'ajouter un match dans la base de données
+
 GET /matchs/player/:id --> récupère tous les matchs d'un player
 
-Modifier la route POST /matchs?action=[pierre, feuille, ciseaux] afin d'ajouter un match dans la base de données
 
 
 3. 
