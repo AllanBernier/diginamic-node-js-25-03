@@ -1,14 +1,18 @@
-const router = require("express").Router() 
+const router = require("express").Router()
 const { index, show, store, update, destroy, getPlayerTournaments, addAvatar } = require("../controller/PlayerController")
 
-router.get("/player", index )
+const playerRequest = require("../middleware/formRequest/PlayerRequest")
+
+
+
+router.get("/player", index)
 router.get("/player/:id", show)
 router.get("/player/:id/tournaments", getPlayerTournaments)
 
 router.post("/player", store)
-router.post("/player/:id/avatar", addAvatar)
+router.post("/player/:id/avatar", playerRequest, addAvatar)
 
-router.put("/player/:id", update)
+router.put("/player/:id", playerRequest, update)
 
 router.delete("/player/:id", destroy)
 
