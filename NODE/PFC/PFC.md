@@ -43,8 +43,9 @@ PUT /tournaments/:id --> Mettre à jour un tournoi existant
 DELETE /tournaments/:id --> Supprimer un tournoi
 
 GET /tournaments/:id/player --> Récupérer tous les players d'un tournoi
-POST /tournaments/:id/player/:userId --> Ajouter un player à un tournoi
-DELETE /tournaments/:id/player/:userId --> Retirer un player d'un tournoi
+
+POST /tournaments/:id/player/:playerId --> Ajouter un player à un tournoi
+DELETE /tournaments/:id/player/:playerId --> Retirer un player d'un tournoi
 
 GET /player/:id/tournaments --> Récupérer tous les tournois d'un player
 

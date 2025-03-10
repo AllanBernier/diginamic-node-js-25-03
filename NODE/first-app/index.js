@@ -1,11 +1,13 @@
 // $npm init
-// $npm install express
+// $npm install express, nodemon, dotenv, sequelize ( prisma ), mongoose
 // $npm run dev
 
 const express = require("express")
 
 const app = express()
 
+
+app.use(express.Router())
 
 app.listen(3000, () => {
   console.log("App Running on port 3000")

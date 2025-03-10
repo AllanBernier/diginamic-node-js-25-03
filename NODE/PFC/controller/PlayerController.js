@@ -1,4 +1,4 @@
-const { Player } = require("../model/index")
+const { Player, Tournament } = require("../model/index")
 
 
 const index = (req, res) => {
@@ -40,4 +40,15 @@ const destroy = async (req, res) => {
   res.json({message : "Player deleted !"})
 }
 
-module.exports = { index, show, store, update, destroy }
+
+const getPlayerTournaments = async (req, res) => {
+  const id = parseInt(req.params.id)
+  const player = await Player.findByPk(id, { include : [Tournament] })
+
+  if (!player) return res.status(400).json({message : "Player not found !"})
+
+  res.json(player)
+}
+
+
+module.exports = { index, show, store, update, destroy, getPlayerTournaments }

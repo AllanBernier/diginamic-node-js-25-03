@@ -10,3 +10,4 @@ app.listen(PORT, () => {
 
 app.use( require("./router/PlayerRouter"))
 app.use( require("./router/MatchRouter"))
+app.use( require("./router/TournamentRouter"))
