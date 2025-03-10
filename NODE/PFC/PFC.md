@@ -50,7 +50,7 @@ DELETE /tournaments/:id/player/:playerId --> Retirer un player d'un tournoi
 GET /player/:id/tournaments --> Récupérer tous les tournois d'un player
 
 4. 
-Ajouter une route sur user pour lui ajouter une image, stocker l'image sur le serveur
+Ajouter une route sur player pour lui ajouter une image, stocker l'image sur le serveur
 
 5.
 Ajoute des règles de validation pour chaque routes ayant un body en utilisant express-validator.

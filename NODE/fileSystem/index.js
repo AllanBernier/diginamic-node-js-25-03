@@ -4,6 +4,7 @@ app.listen(3000, () => console.log("App running on port 3000 !"))
 
 app.use(require("./config/fileSytem"))
 
+const baseUrl = __dirname + "/public/images/"
 
 // controller/playerController.js
 app.post('/upload', (req, res) => {

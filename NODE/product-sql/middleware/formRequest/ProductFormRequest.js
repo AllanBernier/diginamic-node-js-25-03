@@ -6,7 +6,6 @@ const validateProduct = [
     .notEmpty().withMessage("Le nom est requis")
     .isString().withMessage("Le nom doit être un string")
     .trim(),
-
   body("description")
     .notEmpty().withMessage("La description est requis")
     .isString().withMessage("La description doit être un string")
